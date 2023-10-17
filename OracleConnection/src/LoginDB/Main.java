@@ -15,10 +15,13 @@ public class Main implements ActionListener {
 	private TextField result;
 	TextField id, pwd;
 	private MemberDAO dao;
+	private Frame f ;
+	private Frame f2 ;
+	
 
 	public Main() {
 		dao = new MemberDAO();
-		Frame f = new Frame("Login");
+		f = new Frame("Login");
 		f.setSize(330, 180);
 		f.setLayout(null);
 
@@ -55,10 +58,17 @@ public class Main implements ActionListener {
 				System.exit(0);
 			}
 		});
+		
+		
+
+		f2 = new Frame("Window");
+		f2.setSize(500, 500);
+		f2.setLayout(null);
+		f2.setVisible(false);
 	}
 
 	public static void main(String[] args) {
-		Main tft = new Main();
+		new Main();
 	}
 
 	@Override
@@ -67,8 +77,16 @@ public class Main implements ActionListener {
 		System.out.println(id.getText());
 		if (!id.getText().equals("") && !pwd.getText().equals("")) {
 			ArrayList<MemberVo> ar = dao.list(id.getText());
-			if(ar.size() != 0 && ar.get(0).getPwd().equals(pwd.getText())) {
+			if (ar.size() != 0 && ar.get(0).getPwd().equals(pwd.getText())) {
 				result.setText("로그인이 되었습니다");
+				f2.setVisible(true);
+				f.setVisible(false);
+				f2.addWindowListener(new WindowAdapter() {
+					public void windowClosing(WindowEvent we) {
+						System.exit(0);
+					}
+				});
+
 			} else {
 				result.setText("로그인이 실패했습니다.");
 			}
