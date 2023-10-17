@@ -20,15 +20,15 @@ public class OracleInsert {
 			String empLoad = "Select * from emp";
 			ResultSet rs3 = stmt.executeQuery(empLoad);
 
-			  while (rs3.next()) {
-	                int i = 1;
-	                while (i <= rs3.getMetaData().getColumnCount()) {
-	                    String a = rs3.getString(i);
-	                    System.out.print(a + " ");
-	                    i++;
-	                }
-	                System.out.println(); 
-	            }
+			while (rs3.next()) {
+				int i = 1;
+				while (i <= rs3.getMetaData().getColumnCount()) {
+					String a = rs3.getString(i);
+					System.out.print(a + " ");
+					i++;
+				}
+				System.out.println();
+			}
 
 			String maxDeptno = "Select MAX(deptno) from dept";
 			ResultSet maxMaxDeptno = stmt.executeQuery(maxDeptno);
